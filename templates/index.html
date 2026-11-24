@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="card">
+  <h2>Nova execução</h2>
+  <p>Selecione as guias (nomeadas com o número da SPF) e os comprovantes (com o nome original).
+     O sistema renomeia os comprovantes, junta cada guia com o seu comprovante e mostra o que ficou pendente.</p>
+
+  {% if erro %}<div class="erro">{{ erro }}</div>{% endif %}
+
+  <form method="post" action="/processar" enctype="multipart/form-data" id="form">
+    <div class="campos">
+      <div class="campo">
+        <label for="guias">1. Guias de pagamento</label>
+        <input type="file" id="guias" name="guias" accept=".pdf" multiple required>
+        <div class="contagem" id="qtd-guias">Nenhum arquivo selecionado</div>
+      </div>
+      <div class="campo">
+        <label for="comprovantes">2. Comprovantes de pagamento</label>
+        <input type="file" id="comprovantes" name="comprovantes" accept=".pdf" multiple required>
+        <div class="contagem" id="qtd-comprovantes">Nenhum arquivo selecionado</div>
+      </div>
+    </div>
+    <p><button type="submit" id="btn">Processar</button></p>
+  </form>
+</div>
+
+<script>
+  // Mostra quantos arquivos foram escolhidos em cada campo
+  for (const id of ["guias", "comprovantes"]) {
+    document.getElementById(id).addEventListener("change", (e) => {
+      const n = e.target.files.length;
+      document.getElementById("qtd-" + id).textContent =
+        n === 0 ? "Nenhum arquivo selecionado" : n + " arquivo(s) selecionado(s)";
+    });
+  }
+  // Evita clique duplo enquanto processa
+  document.getElementById("form").addEventListener("submit", () => {
+    const btn = document.getElementById("btn");
+    btn.disabled = true;
+    btn.textContent = "Processando... aguarde";
+  });
+</script>
+{% endblock %}

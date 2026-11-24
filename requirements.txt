@@ -1,0 +1,5 @@
+flask
+pypdf
+pypdfium2
+zxing-cpp
+waitress

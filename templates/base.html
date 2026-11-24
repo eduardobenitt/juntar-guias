@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Juntar Guias e Comprovantes</title>
+  <style>
+    :root { --azul: #1f4e79; --verde: #2e7d32; --vermelho: #c62828; --cinza: #f4f6f8; --borda: #d0d7de; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: var(--cinza); color: #222; }
+    header { background: var(--azul); color: #fff; padding: 14px 24px; font-size: 18px; font-weight: 600; }
+    main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid var(--borda); border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+    h2 { margin-top: 0; font-size: 17px; }
+    .campos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .campos { grid-template-columns: 1fr; } }
+    .campo { border: 2px dashed var(--borda); border-radius: 8px; padding: 16px; }
+    .campo label { font-weight: 600; display: block; margin-bottom: 8px; }
+    .contagem { color: #555; font-size: 13px; margin-top: 6px; }
+    button, .botao { background: var(--azul); color: #fff; border: 0; border-radius: 6px; padding: 10px 18px;
+                     font-size: 15px; cursor: pointer; text-decoration: none; display: inline-block; }
+    button:disabled { opacity: .6; cursor: wait; }
+    .botao.secundario { background: #fff; color: var(--azul); border: 1px solid var(--azul); }
+    .erro { background: #fdecea; color: var(--vermelho); padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; }
+    .resumo { display: flex; gap: 16px; flex-wrap: wrap; }
+    .numero { flex: 1; min-width: 150px; text-align: center; padding: 14px; border-radius: 8px; background: var(--cinza); }
+    .numero b { display: block; font-size: 28px; }
+    .ok b { color: var(--verde); } .pend b { color: var(--vermelho); }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--borda); vertical-align: top; }
+    th { background: var(--cinza); }
+    .acoes { display: flex; gap: 12px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <header>Financeiro · Juntar Guias e Comprovantes</header>
+  <main>{% block conteudo %}{% endblock %}</main>
+</body>
+</html>

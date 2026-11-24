@@ -1,0 +1,10 @@
+# Ambiente virtual do Python (cada máquina cria o seu)
+.venv/
+__pycache__/
+*.pyc
+
+# DADOS REAIS - nunca publicar (guias, comprovantes e ZIPs gerados)
+arquivos_exemplo/
+saida/
+*.pdf
+*.zip

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="card">
+  <h2>Resultado</h2>
+  <div class="resumo">
+    <div class="numero"><b>{{ total_guias }}</b>guias enviadas</div>
+    <div class="numero"><b>{{ total_comprovantes }}</b>comprovantes enviados</div>
+    <div class="numero ok"><b>{{ r.juntados|length }}</b>juntados</div>
+    <div class="numero pend"><b>{{ r.pendentes|length }}</b>pendentes</div>
+  </div>
+  <p class="acoes" style="margin-top:18px">
+    <a class="botao" href="/baixar/{{ id_execucao }}">Baixar ZIP (juntados + pendentes + relatório)</a>
+    <a class="botao secundario" href="/">Nova execução</a>
+  </p>
+</div>
+
+{% if r.pendentes %}
+<div class="card">
+  <h2>Pendentes ({{ r.pendentes|length }})</h2>
+  <table>
+    <tr><th>Tipo</th><th>Arquivo</th><th>Motivo</th></tr>
+    {% for p in r.pendentes %}
+    <tr><td>{{ p.tipo }}</td><td>{{ p.nome }}</td><td>{{ p.motivo }}</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
+
+<div class="card">
+  <h2>Juntados ({{ r.juntados|length }})</h2>
+  {% if r.juntados %}
+  <table>
+    <tr><th>Arquivo final</th><th>Comprovante(s)</th></tr>
+    {% for j in r.juntados %}
+    <tr><td>{{ j.nome }}</td><td>{{ j.comprovantes|join(", ") }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}<p>Nenhum arquivo foi juntado.</p>{% endif %}
+</div>
+
+<div class="card">
+  <h2>Comprovantes renomeados ({{ r.renomeados|length }})</h2>
+  <table>
+    <tr><th>Nome original</th><th>Novo nome</th><th>Identificado por</th></tr>
+    {% for original, novo, tipo in r.renomeados %}
+    <tr><td>{{ original }}</td><td>{{ novo }}</td><td>{{ "Linha digitável" if tipo == "LINHA" else "Descrição (SPF)" }}</td></tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
